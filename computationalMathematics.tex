@@ -1,0 +1,147 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{fixltx2e}
+\usepackage{mathrsfs}
+\usepackage{amsfonts}
+\usepackage{makeidx}
+\usepackage[hidelinks]{hyperref}
+\usepackage{relsize}
+\usepackage{array}
+\usepackage{minted}
+%\usepackage{fullpage}
+\usepackage{dsfont}
+\usepackage{amssymb}
+\usepackage{attachfile}
+\usepackage{eurosym}
+\usepackage{tabto}
+\usepackage{pifont}
+\usepackage{tikz}
+\usepackage{verbatim}
+\usepackage{color,listings}
+\usepackage{vwcol}  
+\usepackage{lipsum}
+\usepackage{microtype}
+\usepackage{cleveref}
+\usepackage{frcursive}
+\usepackage[T1]{fontenc}
+\usepackage{bbding}
+\usepackage{pifont}
+\usepackage{mdframed} % Add easy frames to paragraphs
+\usepackage{lipsum} % For dummy text
+\usepackage{xcolor}
+\usepackage{xparse} % Add support for \NewDocumentEnvironment
+\usepackage{todonotes}
+\usepackage{subfiles}
+\usepackage{breqn}
+
+
+\newcommand\finline[3][]{\begin{myfont}[#1]{#2}#3\end{myfont}}%
+\addto\captionsitalian{\renewcommand{\appendixname}{Allegato}}
+\newcommand{\xmark}{\ding{55}}%
+\newcommand{\tr}[1]{{#1}^{T}}
+\newcommand{\inv}[1]{{#1}^{-1}}
+\newcommand{\sqrnorm}[1]{{\|#1\|}^{2}}
+
+\hypersetup{
+  pdfborder = {0 0 0}
+}
+
+\newtheoremstyle{thm}% name of the style to be used
+  {3pt}% measure of space to leave above the theorem. E.g.: 3pt
+  {3pt}% measure of space to leave below the theorem. E.g.: 3pt
+  {\itshape}% name of font to use in the body of the theorem
+  {0pt}% measure of space to indent
+  {\bfseries}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\thmname{#1}\thmnumber{ #2} \thmnote{\bf (#3)}\\}% Manually specify head
+  
+\newtheoremstyle{def}% name of the style to be used
+  {3pt}% measure of space to leave above the theorem. E.g.: 3pt
+  {3pt}% measure of space to leave below the theorem. E.g.: 3pt
+  {\normalfont}% name of font to use in the body of the theorem
+  {0pt}% measure of space to indent
+  {\bfseries}% name of head font
+  {}% punctuation between head and body
+  { }% space after theorem head; " " = normal interword space
+  {\thmname{#1}\thmnumber{ #2} \thmnote{\bf (#3)}\\}% Manually specify head
+  
+\newcommand\stareq{\stackrel{\mathclap{\normalfont\mbox{*}}}{=}}
+\newcommand\questeq{\stackrel{\mathclap{\normalfont\mbox{?}}}{=}}
+
+\theoremstyle{thm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Fact}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{def}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\usetikzlibrary{calc}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{automata,positioning}
+
+\tikzstyle{block} = [draw, fill=blue!20, rectangle, 
+    minimum height=3em, minimum width=6em, align=center]
+\tikzstyle{dblock} = [block,double,double distance = 0.1em]
+\tikzstyle{sblock} = [block,dashed]
+\tikzstyle{sum} = [draw, fill=blue!20, circle, node distance=1cm]
+\tikzstyle{pinstyle} = [pin edge={to-,thin,black}]
+\tikzstyle{nlabel} = [above,pos=0.5,anchor=center,align=center]
+\tikzstyle{nslabel} = [nlabel,sloped]
+\tikzstyle{label} = [nlabel,fill=white,inner sep=1pt]
+\tikzstyle{slabel} = [label,sloped]
+\tikzstyle{arr} = [->, rounded corners]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+\vspace{3cm}
+
+\Large
+
+\vspace{2cm}
+
+\includegraphics[scale=0.3]{Cherubino.jpg}
+
+\vspace{2.5cm}
+
+{\Huge \sc Computational Mathematics}
+
+\vspace{2cm}
+Based on Antonio Frangioni's and\\
+  Federico Poloni's lectures
+
+\vspace{2cm}
+First draft provided by Gemma Martini
+\vfill
+
+\today
+
+\end{center}
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~%%%%%%%%%%%%%%%%%%%%%%
+
+\tableofcontents
+\newpage
+
+\subfile{18ottobre}
+
+\end{document}
+
+
