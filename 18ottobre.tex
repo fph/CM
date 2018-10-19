@@ -18,6 +18,7 @@ where $f(x) = {x}^{T}{A}^{T}Ax - 2{b}^{T}Ax + {b}^{T}b$
 
 $\nabla  f(x) = 2 {A}^{T}Ax - 2{A}^{T}b$
 \todo{Non mi torna il 2}
+\todo{The 2 comes from the two copies of the term ${x}^{T}{A}^{T}Ah={h}^{T}{A}^{T}Ax$ (they are equal because they are $1\times 1$ and one the transpose of the other). Each of them contributes one $A^TAx$. Think about the scalar case, to have a different angle: the derivative of $x^2$ is $2x$, because $(x+h)^2=x^2+2hx+o(h)$.}
 How should we compute this gradient? 
 
 We know that $f(x+h) = f(x) + {(\nabla f(x))}^{T} \dot h  + o(\|h\|)$
@@ -25,13 +26,14 @@ We know that $f(x+h) = f(x) + {(\nabla f(x))}^{T} \dot h  + o(\|h\|)$
 \begin{equation}
   \begin{split}
     f(x+h) & = {(x+h)}^{T} {A}^{T}A(x+h) - 2{b}^{T}A(x+h) +{b}^{T}b\\
-    & = {\bf \color{blue} {x}^{T}{A}^{T}Ax} + {x}^{T}{A}^{T}Ah + {\bf \color{red} {h}^{T}{A}^{T}Ax} + {\bf \color{red} {h}^{T}{A}^{T}Ah} {\bf \color{blue}- 2{b}^{T}Ax} - 2{b}^{T}Ah + {\bf \color{blue} {b}^{T}b}\\
+    & = {\bf \color{blue} {x}^{T}{A}^{T}Ax} + {x}^{T}{A}^{T}Ah + {h}^{T}{A}^{T}Ax + {\bf \color{red} {h}^{T}{A}^{T}Ah} {\bf \color{blue}- 2{b}^{T}Ax} - 2{b}^{T}Ah + {\bf \color{blue} {b}^{T}b}\\
     & = {\bf \color{blue}f(x)} +({x}^{T}{A}^{T}Ah-2{b}^{T}Ah) + {\bf \color{red} o(\|h\|)}\\
     & = f(x) + {\bf \color{magenta} \tr{(\tr{A}Ax-2\tr{A}b)}h} + o(\|h\|) 
   \end{split}
 \end{equation}
 
-So, ${\bf \color{magenta} \nabla  f(x) = {A}^{T}Ax - 2{A}^{T}b}$
+
+So, ${\bf \color{magenta} \nabla  f(x) = 2{A}^{T}Ax - 2{A}^{T}b}$
 
 We would like to know when the gradient is $0$.
 
@@ -44,16 +46,16 @@ Since ${A}^{T}A$ is a {\bf square} matrix and also {\bf non singular} (which mea
   \item LU factorization;
   \item QR factorization;
   \item Cholesky factorization (specialyzed method for positive definite matrices)
-    Idea: ${A}^{T}A$ can be written as ${A}^{T}A={A}^{T}R$, where $R$ is a square, upper triangular matrix.
+    Idea: ${A}^{T}A$ can be written as ${A}^{T}A={R}^{T}R$, where $R$ is a square, upper triangular matrix.
 \end{itemize}
 
 Why do we need factorization method?
-Let's compute complexty:
+Let's compute complexity:
 \begin{itemize}
   \item ${A}^{T}A ~ \rightarrow ~ 2m{n}^{2}$, where $m>n$;
   \item ${A}^{T}b ~ \rightarrow ~ 2mn$;
   \item Solving ${A}^{T}Ax={A}^{T}b$ with gaussian elimination has a computational complexity of $\frac{2}{3}{n}^{3}$;
-  \item Cholexky factorization ${A}^{T}A={R}^{T}R$ which has a cost of $\frac{1}{3}{n}^{3}$
+  \item Cholesky factorization ${A}^{T}A={R}^{T}R$ which has a cost of $\frac{1}{3}{n}^{3}$
 
 
 \end{itemize}
@@ -63,7 +65,7 @@ This method solves least squares problem and takes his name from the fact that `
 
 The key idea is using symmetry to skip half of the entries of ${A}^{T}A$
 
-If $Ax=b$ can't be solved, since $A$ is tall and thin, we can multiply on both sides for ${A}^{T}$ and try again, since the matrix is square now.
+If $Ax=b$ can't be solved, since $A$ is tall and thin, we can multiply on both sides by ${A}^{T}$ and try again, since the matrix is square now.
 
 The residual $Ax-b$ is orthogonal to any vector $v \in span(A): {(Av)}^{T} (Ax-b)=0$
 
@@ -88,7 +90,7 @@ In particular, the solution of $\|\min Ax - ({b}_{1})\| \dots$\todo{missing}
 \subsection{QR factorization}
 
 \begin{theorem}
-  $\forall A \in \mathcal{M}(m, m, \mathds{R}),~ \exists  Q \in \mathcal{O}(m, m \mathds{R})$ (space of orthogonal matrices of size $m\times m$), $\exists R \in \mathcal{M}(m, m, \mathds{R})$ upper triangular such that $A=QR$
+  $\forall A \in \mathcal{M}(m, m, \mathds{R}),~ \exists  Q \in \mathcal{O}(m, m, \mathds{R})$ (space of orthogonal matrices of size $m\times m$), $\exists R \in \mathcal{M}(m, m, \mathds{R})$ upper triangular such that $A=QR$
 \end{theorem}
 
 QR factorization isn't as powerful as SVD factorization.
@@ -149,7 +151,7 @@ Let's analyze the case in which $A$ is a vector. Given $x \in \mathds{R}^m$, we 
 \end{proof}
 
 \begin{example}
-$hx = (I \ \frac{2}{{\|U\|}^{2}} U \tr{U})x = x - \frac{2}{{\|U\|}^{2}} U (\tr{U} U)$
+$Hx = (I \ \frac{2}{{\|U\|}^{2}} U \tr{U})x = x - \frac{2}{{\|U\|}^{2}} U (\tr{U} U)$
 
 $y = compute\_product(U,x)$
 
@@ -157,7 +159,7 @@ $a = U' * x$
 
 $b=U' * U$
 
-$y = x \frac{2*a}{b} \times U$
+$y = x + \frac{2*a}{b} * U$
 
 All these operations are linear operations, so the complexity is $O(m)$, cheaper than generic matrix-vector product ($O(m^2)$).
 \end{example}
@@ -167,7 +169,7 @@ Can we find a matrix $H$ in this family that maps $x$ to $y$ (equivalently $Hx =
 \begin{lemma}
  $\forall x, y ~ s.t ~ \|x\| = \|y\| \exists H ~ s.t. ~ Hx = y$.
 
-We may choose $u = $ \todo{missing}
+We may choose $u = x-y$ \todo{missing}
 
 \end{lemma}
 
@@ -177,7 +179,7 @@ Geometric idea:
 
 What happens if $y = \begin{pmatrix} \|x\|\\ 0\\ \cdot\\ \cdot\\ \cdot\\ 0\end{pmatrix}$?
   
-  $y = \tr{H}x$, actually $\tr{H} = {U}^{-1} = U$
+  $y = \tr{H}x$, actually $\tr{H} = {H}^{-1} = H$
   Let's map $x$ to $y$: 
   \[
     U = x - y =
